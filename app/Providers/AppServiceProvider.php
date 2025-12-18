@@ -6,6 +6,7 @@ namespace App\Providers;
 
 use Filament\Tables\Table;
 use Illuminate\Support\ServiceProvider;
+use URL;
 
 final class AppServiceProvider extends ServiceProvider
 {
@@ -16,6 +17,7 @@ final class AppServiceProvider extends ServiceProvider
 
     public function boot(): void
     {
+        URL::forceScheme('https');
         $this->configureTable();
     }
 
