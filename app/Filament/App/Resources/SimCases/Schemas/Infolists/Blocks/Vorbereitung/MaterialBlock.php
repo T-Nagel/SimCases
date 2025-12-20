@@ -48,6 +48,7 @@ final class MaterialBlock implements Block
             ->schema([
                 Repeater::make('items')
                     ->hiddenLabel()
+                    ->addActionLabel('Material hinzufügen')
                     ->schema([
                         FusedGroup::make([
                             TextInput::make('label')
