@@ -9,7 +9,7 @@ use Filament\Resources\Pages\ViewRecord;
 final class ViewSimCase extends ViewRecord
 {
     protected static string $resource = SimCaseResource::class;
-
+    
     protected function getHeaderActions(): array
     {
         return [

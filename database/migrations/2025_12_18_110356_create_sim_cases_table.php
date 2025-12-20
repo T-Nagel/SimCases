@@ -14,9 +14,12 @@ return new class() extends Migration
             $table->id();
             $table->timestamps();
             $table->string('name');
+            $table->string('author');
+            $table->string('organisation')->nullable();
             $table->json('vorbereitung');
             $table->json('fallbeispiel');
             $table->json('debriefing');
+            $table->json('files')->nullable();
         });
     }
 };

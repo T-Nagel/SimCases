@@ -13,6 +13,7 @@ final class SimCase extends Model
             'vorbereitung' => 'array',
             'fallbeispiel' => 'array',
             'debriefing' => 'array',
+            'files' => 'array',
         ];
     }
 }

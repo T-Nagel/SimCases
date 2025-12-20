@@ -4,6 +4,10 @@ declare(strict_types=1);
 
 namespace App\Filament\App\Resources\SimCases\Schemas;
 
+use App\Filament\App\Resources\SimCases\Schemas\Infolists\DebriefingBlocks;
+use App\Filament\App\Resources\SimCases\Schemas\Infolists\FallbeispielBlocks;
+use App\Filament\App\Resources\SimCases\Schemas\Infolists\FilesBlocks;
+use App\Filament\App\Resources\SimCases\Schemas\Infolists\VorbereitungBlocks;
 use Filament\Forms\Components\Builder;
 use Filament\Forms\Components\Builder\Block;
 use Filament\Forms\Components\Repeater;
@@ -28,8 +32,15 @@ final class SimCaseForm
                         Tab::make('Allgemeine Infos')
                             ->schema([
                                 TextInput::make('name')
-                                    ->label('Bezeichnung')
+                                    ->label('Bezeichnung: Diagnose / Thema')
                                     ->required()
+                                    ->maxLength(255),
+                                TextInput::make('author')
+                                    ->label('Autoren')
+                                    ->required()
+                                    ->maxLength(255),
+                                TextInput::make('organisation')
+                                    ->label('Organisation')
                                     ->maxLength(255),
                             ]),
                         Tab::make('Vorbereitung')
@@ -38,36 +49,8 @@ final class SimCaseForm
                                     ->addActionLabel('Block hinzufügen')
                                     ->hiddenLabel()
                                     ->blockNumbers(false)
-                                    ->blocks([
-                                        Block::make('briefing')
-                                            ->label('Schauspielerbriefing')
-                                            ->maxItems(1)
-                                            ->schema([
-                                                RichEditor::make('text')
-                                                    ->hiddenLabel()
-                                                    ->required(),
-                                            ]),
-                                        Block::make('material')
-                                            ->label('Material')
-                                            ->maxItems(1)
-                                            ->schema([
-                                                Repeater::make('items')
-                                                    ->hiddenLabel()
-                                                    ->schema([
-                                                        FusedGroup::make([
-                                                            TextInput::make('label')
-                                                                ->placeholder('Material')
-                                                                ->required(),
-                                                            TextInput::make('number')
-                                                                ->placeholder('Anzahl')
-                                                                ->numeric()
-                                                                ->required(),
-                                                        ])
-                                                            ->columns(2),
-                                                    ]),
-                                            ]),
-                                    ])
                                     ->label('Vorbereitung')
+                                    ->blocks(VorbereitungBlocks::makeFormBlocks())
                                     ->required(),
                             ]),
                         Tab::make('Fallbeispiel')
@@ -77,74 +60,34 @@ final class SimCaseForm
                                     ->addActionLabel('Block hinzufügen')
                                     ->hiddenLabel()
                                     ->blocks([
-                                        Block::make('einsatzmeldung')
-                                            ->label('Einsatzmeldung')
-                                            ->maxItems(1)
-                                            ->schema([
-                                                TextInput::make('text')
-                                                    ->label('Meldung')
-                                                    ->required(),
-                                            ]),
-                                        Block::make('lage')
-                                            ->label('Lage vor Ort')
-                                            ->maxItems(1)
-                                            ->schema([
-                                                Textarea::make('Beschreibung'),
-                                            ]),
-                                        Block::make('primary')
-                                            ->label('ABCDE Schema')
-                                            ->maxItems(1)
-                                            ->schema([
-                                                Select::make('Art')
-                                                    ->options([
-                                                        'primary' => 'Primary Assessment',
-                                                        'secondary' => 'Secondary Assessment',
-                                                    ]),
-                                                TextInput::make('A'),
-                                                TextInput::make('B'),
-                                                TextInput::make('C'),
-                                                TextInput::make('D'),
-                                                TextInput::make('E'),
-                                            ]),
-                                        Block::make('vitals')
-                                            ->label('Vitalwerte')
-                                            ->maxItems(1)
-                                            ->schema([
-                                                TextInput::make('HF')
-                                                    ->label('Herzfrequenz'),
-                                                TextInput::make('RR')
-                                                    ->label('Blutdruck'),
-                                                TextInput::make('Rekap')
-                                                    ->label('Rekap'),
-                                                TextInput::make('SpO2')
-                                                    ->label('SpO2'),
-                                                TextInput::make('AF')
-                                                    ->label('Atemfrequenz'),
-                                            ]),
+                                        ...FallbeispielBlocks::makeFormBlocks(),
+
                                     ])
                                     ->required(),
                             ]),
                         Tab::make('Debriefing')
                             ->schema([
                                 Builder::make('debriefing')
-                                    ->hiddenLabel()
                                     ->blockNumbers(false)
                                     ->addActionLabel('Block hinzufügen')
-                                    ->schema([
-                                        Block::make('points')
-                                            ->label('Lernziele')
-                                            ->schema([
-                                                Repeater::make('items')
-                                                    ->hiddenLabel()
-                                                    ->addActionLabel('Lernziel hinzufügen')
-                                                    ->schema([
-                                                        TextInput::make('point')
-                                                            ->hiddenLabel()
-                                                            ->placeholder('Lernziel')
-                                                            ->required(),
-                                                    ]),
-                                            ]),
-                                    ]),
+                                    ->hiddenLabel()
+                                    ->blocks([
+                                        ...DebriefingBlocks::makeFormBlocks(),
+
+                                    ])
+                                    ->required(),
+                            ]),
+                        Tab::make('Dateien')
+                            ->schema([
+                                Builder::make('files')
+                                    ->blockNumbers(false)
+                                    ->addActionLabel('Block hinzufügen')
+                                    ->hiddenLabel()
+                                    ->blocks([
+                                        ...FilesBlocks::makeFormBlocks(),
+
+                                    ])
+                                    ->required(),
                             ]),
                     ]),
             ]);

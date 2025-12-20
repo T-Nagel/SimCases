@@ -27,6 +27,7 @@ final class SimCaseResource extends Resource
     protected static ?string $recordTitleAttribute = 'name';
     protected static ?string $modelLabel = 'Fallbeispiel';
     protected static ?string $pluralModelLabel = 'Fallbeispiele';
+    protected static ?string $slug = 'cases';
 
     public static function form(Schema $schema): Schema
     {
