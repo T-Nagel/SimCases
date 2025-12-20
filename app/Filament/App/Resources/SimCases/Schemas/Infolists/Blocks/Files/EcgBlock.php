@@ -21,8 +21,6 @@ final class EcgBlock implements Block
 
     public static function makeView(array $block): Section
     {
-        dump($block);
-
         return Section::make()
             ->contained(false)
             ->label('EKG: '.$block['data']['label'] ?? 'EKG')

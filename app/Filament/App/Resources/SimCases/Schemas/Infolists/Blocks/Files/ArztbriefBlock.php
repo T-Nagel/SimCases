@@ -21,8 +21,6 @@ final class ArztbriefBlock implements Block
 
     public static function makeView(array $block): Section
     {
-        dump($block);
-
         return Section::make()
             ->contained(false)
             ->label('Arztbrief: '.$block['data']['label'] ?? 'Arztbrief')

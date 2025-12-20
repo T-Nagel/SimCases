@@ -67,7 +67,6 @@
 
                 <div x-show="activeTab === 'tab2'" x-cloak>
                     @foreach ($this->getRecord()->vorbereitung as $item)
-                        @dump($item)
                         @includeIf(
                             'filament.resources.cases.blocks.briefing.' . $item['type'],
                             ['data' => $item['data']]
@@ -77,7 +76,6 @@
 
                 <div x-show="activeTab === 'tab3'" x-cloak>
                     @foreach ($this->getRecord()->fallbeispiel as $item)
-                        @dump($item['type'])
                         @includeIf(
                             'filament.resources.cases.blocks.fallbeispiel.' . $item['type'],
                             ['data' => $item['data']]
@@ -87,7 +85,6 @@
 
                 <div x-show="activeTab === 'tab4'" x-cloak>
                     @foreach ($this->getRecord()->debriefing as $item)
-                        @dump($item['type'])
                         @includeIf(
                             'filament.resources.cases.blocks.debriefing.' . $item['type'],
                             ['data' => $item['data']]
