@@ -32,7 +32,7 @@ final class BriefingBlock implements Block
                     ->state($block['data']['text'])
                     ->html(),
                 RepeatableEntry::make('data')
-                    ->state($block['data']['people'])
+                    ->state($block['data']['people'] ?? [])
                     ->label('Personen')
                     ->table([
                         TableColumn::make('Name'),
