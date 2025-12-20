@@ -28,6 +28,7 @@ final class SimCaseInfolist
                             TextEntry::make('name'),
                             TextEntry::make('author')->label('Autor'),
                             TextEntry::make('organisation'),
+                            TextEntry::make('tags')->badge(),
                         ]),
                     Tab::make('Vorbereitung')
                         ->schema(function ($record) {

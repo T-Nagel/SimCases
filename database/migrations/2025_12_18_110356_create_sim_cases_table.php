@@ -16,9 +16,10 @@ return new class() extends Migration
             $table->string('name');
             $table->string('author');
             $table->string('organisation')->nullable();
-            $table->json('vorbereitung');
+            $table->json('tags')->nullable();
+            $table->json('vorbereitung')->nullable();
             $table->json('fallbeispiel');
-            $table->json('debriefing');
+            $table->json('debriefing')->nullable();
             $table->json('files')->nullable();
         });
     }

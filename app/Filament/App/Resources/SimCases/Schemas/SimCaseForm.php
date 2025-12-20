@@ -9,6 +9,7 @@ use App\Filament\App\Resources\SimCases\Schemas\Infolists\FallbeispielBlocks;
 use App\Filament\App\Resources\SimCases\Schemas\Infolists\FilesBlocks;
 use App\Filament\App\Resources\SimCases\Schemas\Infolists\VorbereitungBlocks;
 use Filament\Forms\Components\Builder;
+use Filament\Forms\Components\TagsInput;
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Components\Tabs;
 use Filament\Schemas\Components\Tabs\Tab;
@@ -36,6 +37,9 @@ final class SimCaseForm
                                 TextInput::make('organisation')
                                     ->label('Organisation')
                                     ->maxLength(255),
+                                TagsInput::make('tags')
+                                    ->label('Tags')
+                                    ->placeholder('Tag hinzufügen'),
                             ]),
                         Tab::make('Vorbereitung')
                             ->schema([
@@ -44,8 +48,7 @@ final class SimCaseForm
                                     ->hiddenLabel()
                                     ->blockNumbers(false)
                                     ->label('Vorbereitung')
-                                    ->blocks(VorbereitungBlocks::makeFormBlocks())
-                                    ->required(),
+                                    ->blocks(VorbereitungBlocks::makeFormBlocks()),
                             ]),
                         Tab::make('Fallbeispiel')
                             ->schema([
@@ -53,10 +56,7 @@ final class SimCaseForm
                                     ->blockNumbers(false)
                                     ->addActionLabel('Block hinzufügen')
                                     ->hiddenLabel()
-                                    ->blocks([
-                                        ...FallbeispielBlocks::makeFormBlocks(),
-
-                                    ])
+                                    ->blocks(FallbeispielBlocks::makeFormBlocks())
                                     ->required(),
                             ]),
                         Tab::make('Debriefing')
@@ -65,11 +65,7 @@ final class SimCaseForm
                                     ->blockNumbers(false)
                                     ->addActionLabel('Block hinzufügen')
                                     ->hiddenLabel()
-                                    ->blocks([
-                                        ...DebriefingBlocks::makeFormBlocks(),
-
-                                    ])
-                                    ->required(),
+                                    ->blocks(DebriefingBlocks::makeFormBlocks()),
                             ]),
                         Tab::make('Dateien')
                             ->schema([
