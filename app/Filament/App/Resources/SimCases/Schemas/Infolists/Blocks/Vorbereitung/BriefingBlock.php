@@ -22,8 +22,6 @@ final class BriefingBlock implements Block
 
     public static function makeView(array $block): Section
     {
-        dump($block);
-
         return Section::make()
             ->label('Schauspielerinfos')
             ->schema([
