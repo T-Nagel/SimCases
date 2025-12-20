@@ -9,13 +9,7 @@ use App\Filament\App\Resources\SimCases\Schemas\Infolists\FallbeispielBlocks;
 use App\Filament\App\Resources\SimCases\Schemas\Infolists\FilesBlocks;
 use App\Filament\App\Resources\SimCases\Schemas\Infolists\VorbereitungBlocks;
 use Filament\Forms\Components\Builder;
-use Filament\Forms\Components\Builder\Block;
-use Filament\Forms\Components\Repeater;
-use Filament\Forms\Components\RichEditor;
-use Filament\Forms\Components\Select;
-use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
-use Filament\Schemas\Components\FusedGroup;
 use Filament\Schemas\Components\Tabs;
 use Filament\Schemas\Components\Tabs\Tab;
 use Filament\Schemas\Schema;
@@ -85,9 +79,7 @@ final class SimCaseForm
                                     ->hiddenLabel()
                                     ->blocks([
                                         ...FilesBlocks::makeFormBlocks(),
-
-                                    ])
-                                    ->required(),
+                                    ]),
                             ]),
                     ]),
             ]);
