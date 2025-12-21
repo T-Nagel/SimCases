@@ -1,15 +1,16 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Filament\App\Resources\SimCases\Tables;
 
-use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Actions\ViewAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
-class SimCasesTable
+final class SimCasesTable
 {
     public static function configure(Table $table): Table
     {
@@ -18,10 +19,24 @@ class SimCasesTable
                 TextColumn::make('name')
                     ->sortable()
                     ->searchable(),
+                TextColumn::make('author')
+                    ->sortable()
+                    ->label('Autor')
+                    ->searchable()
+                    ->toggleable(isToggledHiddenByDefault: true),
+                TextColumn::make('organisation')
+                    ->sortable()
+                    ->searchable()
+                    ->toggleable(isToggledHiddenByDefault: true),
+                TextColumn::make('tags')
+                    ->sortable()
+                    ->searchable()
+                    ->toggleable()
+                    ->badge(),
                 TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
-                    ->toggleable(),
+                    ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
                 //
@@ -33,9 +48,7 @@ class SimCasesTable
             ->emptyStateHeading('Keine Einträge')
             ->emptyStateDescription('Erstelle jetzt das erste Fallbeispiel.')
             ->toolbarActions([
-                BulkActionGroup::make([
-                    DeleteBulkAction::make(),
-                ]),
+                DeleteBulkAction::make(),
             ]);
     }
 }
